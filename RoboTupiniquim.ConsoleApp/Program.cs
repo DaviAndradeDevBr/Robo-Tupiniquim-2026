@@ -32,7 +32,7 @@ class Program
         {
             char comandoAtual = comandoCompleto[contador];
 
-            Console.WriteLine(comandoAtual);
+            
 
             if (comandoAtual == 'E')
             {
@@ -47,6 +47,13 @@ class Program
                 else if (orientacao == 'L') orientacao = 'S';
                 else if (orientacao == 'S') orientacao = 'O';
                 else if (orientacao == 'O') orientacao = 'N';
+            }
+            else if (comandoAtual == 'M')
+            {
+                if (orientacao == 'N') posicaoY++;
+                else if (orientacao == 'S') posicaoY--;
+                else if (orientacao == 'O') posicaoX--;
+                else if (orientacao == 'L') posicaoX++;
             }
         }
         
