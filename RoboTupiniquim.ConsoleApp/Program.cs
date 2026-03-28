@@ -10,54 +10,81 @@
 
 */
 
-class Program
+
+static class Robo
 {
-    static void Main(string[] args)
+    public static int posicaoX = 1;
+    public static int posicaoY = 2;
+    public static char orientacao = 'N';
+
+
+    public static void Configurar(int pX, int pY, char ort)
     {
-        int posicaoX = 1;
-        int posicaoY = 2;
-        char orientacao = 'N';
+        posicaoX = pX;
+        posicaoY = pY;
+        orientacao = ort;
+    }
 
-        string comandoCompleto = "EMEMEMEMM";
-        
-        
-        Console.WriteLine("-------------------------------");
-        Console.WriteLine("Robô Tupiniquim");
-        Console.WriteLine("-------------------------------");
-        
-        Console.WriteLine($"Posição inicial: {posicaoX} {posicaoY} {orientacao}");
-
-        // algoritmo
+    public static void EecutarComando(string comandoCompleto)
+    {
         for (int contador = 0; contador < comandoCompleto.Length; contador++)
         {
             char comandoAtual = comandoCompleto[contador];
 
             
-
             if (comandoAtual == 'E')
-            {
-                if (orientacao == 'N') orientacao = 'O';
-                else if (orientacao == 'O') orientacao = 'S';
-                else if (orientacao == 'S') orientacao = 'L';
-                else if (orientacao == 'L') orientacao = 'N';
-            }
+                GirarParaEsquerda();
+            
             else if (comandoAtual == 'D')
-            {
-                if (orientacao == 'N') orientacao = 'L';
-                else if (orientacao == 'L') orientacao = 'S';
-                else if (orientacao == 'S') orientacao = 'O';
-                else if (orientacao == 'O') orientacao = 'N';
-            }
+                GirarParaDireita();
+            
             else if (comandoAtual == 'M')
-            {
-                if (orientacao == 'N') posicaoY++;
-                else if (orientacao == 'S') posicaoY--;
-                else if (orientacao == 'O') posicaoX--;
-                else if (orientacao == 'L') posicaoX++;
-            }
+                Avancar();
         }
+    }
+
+    public static void Avancar()
+    {
+        if (orientacao == 'N') posicaoY++;
+        else if (orientacao == 'S') posicaoY--;
+        else if (orientacao == 'O') posicaoX--;
+        else if (orientacao == 'L') posicaoX++;
+    }
+    
+    public static void GirarParaEsquerda()
+    {
+        if (orientacao == 'N') orientacao = 'O';
+        else if (orientacao == 'O') orientacao = 'S';
+        else if (orientacao == 'S') orientacao = 'L';
+        else if (orientacao == 'L') orientacao = 'N';
+    }
+
+
+    public static void GirarParaDireita()
+    {
+        if (orientacao == 'N') orientacao = 'L';
+        else if (orientacao == 'L') orientacao = 'S';
+        else if (orientacao == 'S') orientacao = 'O';
+        else if (orientacao == 'O') orientacao = 'N';
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Robo.Configurar(1, 2, 'N');
+
+
+        Console.WriteLine("-------------------------------");
+        Console.WriteLine("Robô Tupiniquim");
+        Console.WriteLine("-------------------------------");
         
-        Console.WriteLine($"Posição final: {posicaoX} {posicaoY} {orientacao}");
+        Console.WriteLine($"Posição inicial: {Robo.posicaoX} {Robo.posicaoY} {Robo.orientacao}");
+
+        Robo.EecutarComando("EMEMEMEMM");
+        
+        Console.WriteLine($"Posição final: {Robo.posicaoX} {Robo.posicaoY} {Robo.orientacao}");
         Console.ReadLine();
 
     }
